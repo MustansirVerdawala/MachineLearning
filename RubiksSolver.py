@@ -972,6 +972,79 @@ def testAlg(cube):
             break
         
 
+def inputCube():
+    print("\n Enter your configuration, separate rows by enter, separate row elements by space:")
+    WR1=input("\nEnter the first white row, red facing up: ")
+    WR1=WR1.split()
+    WR2=input("Enter the second white row, red facing up: ")
+    WR2=WR2.split()
+    WR3=input("Enter the third white row, red facing up: ")
+    WR3=WR3.split()
+    
+    RR1=input("\nEnter the first red row, yellow facing up: ")
+    RR1=RR1.split()
+    RR2=input("Enter the second red row, yellow facing up: ")
+    RR2=RR2.split()
+    RR3=input("Enter the third red row, yellow facing up: ")
+    RR3=RR3.split()
+    
+    GR1=input("\nEnter the first green row, yellow facing up: ")
+    GR1=GR1.split()
+    GR2=input("Enter the second green row, yellow facing up: ")
+    GR2=GR2.split()
+    GR3=input("Enter the third green row, yellow facing up: ")
+    GR3=GR3.split()
+    
+    OR1=input("\nEnter the first orange row, yellow facing up: ")
+    OR1=OR1.split()
+    OR2=input("Enter the second orange row, yellow facing up: ")
+    OR2=OR2.split()
+    OR3=input("Enter the third orange row, yellow facing up: ")
+    OR3=OR3.split()
+    
+    BR1=input("\nEnter the first blue row, yellow facing up: ")
+    BR1=BR1.split()
+    BR2=input("Enter the second blue row, yellow facing up: ")
+    BR2=BR2.split()
+    BR3=input("Enter the third blue row, yellow facing up: ")
+    BR3=BR3.split()
+    
+    YR1=input("\nEnter the first yellow row, red facing up: ")
+    YR1=YR1.split()
+    YR2=input("Enter the second yellow row, red facing up: ")
+    YR2=YR2.split()
+    YR3=input("Enter the third yellow row, red facing up: ")
+    YR3=YR3.split()
+    
+    WR={'Or':[int(WR1[1]),int(RR3[1]),0], 'CPos':[1,1,0]}
+    WB={'Or':[int(WR2[0]),0,int(BR3[1])], 'CPos':[1,0,1]}
+    WO={'Or':[int(WR3[1]),int(OR3[1]),0], 'CPos':[1,-1,0]}
+    WG={'Or':[int(WR2[2]),0,int(GR3[1])], 'CPos':[1,0,-1]}
+    RB={'Or':[0,int(RR2[0]),int(BR2[2])], 'CPos':[0,1,1]}
+    OB={'Or':[0,int(OR2[2]),int(BR2[0])], 'CPos':[0,-1,1]}
+    OG={'Or':[0,int(OR2[0]),int(GR2[2])], 'CPos':[0,-1,-1]}
+    RG={'Or':[0,int(RR2[2]),int(GR2[0])], 'CPos':[0,1,-1]}
+    YR={'Or':[int(YR1[1]),int(RR1[1]),0], 'CPos':[-1,1,0]}
+    YB={'Or':[int(YR2[0]),0,int(BR1[1])], 'CPos':[-1,0,1]}
+    YO={'Or':[int(YR3[1]),int(OR1[1]),0], 'CPos':[-1,-1,0]}
+    YG={'Or':[int(YR2[2]),0,int(GR1[1])], 'CPos':[-1,0,-1]}
+
+    WRB={'Or':[int(WR1[0]),int(RR3[0]),int(BR3[2])], 'CPos':[1,1,1]}
+    WOB={'Or':[int(WR3[0]),int(OR3[2]),int(BR3[0])], 'CPos':[1,-1,1]}
+    WOG={'Or':[int(WR3[2]),int(OR3[0]),int(GR3[2])], 'CPos':[1,-1,-1]}
+    WRG={'Or':[int(WR1[2]),int(RR3[2]),int(GR3[0])], 'CPos':[1,1,-1]}
+    YRB={'Or':[int(YR1[0]),int(RR1[0]),int(BR1[2])], 'CPos':[-1,1,1]}
+    YOB={'Or':[int(YR3[0]),int(OR1[2]),int(BR1[0])], 'CPos':[-1,-1,1]}
+    YOG={'Or':[int(YR3[2]),int(OR1[0]),int(GR1[2])], 'CPos':[-1,-1,-1]}
+    YRG={'Or':[int(YR3[2]),int(RR1[2]),int(GR1[0])], 'CPos':[-1,1,-1]}
+
+    corners = {'WRB':WRB, 'WOB':WOB, 'WOG':WOG, 'WRG':WRG, 'YRB':YRB, 'YOB':YOB, 'YOG':YOG, 'YRG':YRG}
+
+    edges={'WR':WR, 'WB':WB, 'WO':WO, 'WG':WG, 'RB':RB, 'OB':OB, 'OG':OG, 'RG':RG, 'YR':YR, 'YB':YB, 'YO':YO, 'YG':YG}
+
+    cube={'C':corners, 'E':edges}
+    
+    return cube
 
 #Defining Essential Variables
 
@@ -987,10 +1060,43 @@ analogMoves={'CW':('L','F','R','B','L','F','R'), 'ACW':('LP','FP','RP','BP','LP'
 
 #
 
-cube,shuffMoves=shuffleRandom(cube,5)
-
-print("Shuffle Moves:",shuffMoves)
-
-solve(cube)
-
-#testAlg(cube)
+while True:
+    
+    print("\n",'*'*25)
+    print("\t"*4, "Menu")
+    print("\t1. Input Cube")
+    print("\t2. Display Cube")
+    print("\t3. Shuffle Randomly")
+    print("\t4. Shuffle Sequentially")
+    print("\t5. Reset Cube")
+    print("\t6. Solve Cube")
+    print("\t7.", "Quit")
+    
+    ch=input("\n \t Enter your choice:")
+    
+    if ch.isdigit():
+        if int(ch)==1:
+            cube=inputCube()
+            print("\nCube Entered!")
+        elif int(ch)==2:
+            displayCube(cube)
+        elif int(ch)==3:
+            cube,shuffMoves=shuffleRandom(cube)
+            print("Shuffle Moves:", shuffMoves)
+        elif int(ch)==4:
+            s=input("Enter your Moves separated by a space:")
+            cube=shuffleSeq(s)
+            print("\n\tShuffled!")
+        elif int(ch)==5:
+            cube=reset()
+            print("\n\\t Cube Reset!")
+        elif int(ch)==6:
+            solve(cube)
+            print("\nCube Solved!")
+        elif int(ch)==7:
+            print("\n\t Program Terminated!")
+            break
+        else:
+            print("\nInvalid Input")
+    else:
+        print("\nInvalid Input")
