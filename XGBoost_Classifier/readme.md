@@ -33,6 +33,7 @@ This project builds a binary classification model using XGBoost to predict the l
   - `max_depth=2`, `gamma=0.25`, `learning_rate=0.05`
   - `n_estimators=10000`, with `early_stopping_rounds=100`
   - `eval_metric='aucpr'`
+  - Focus: The primary optimization goal in this project was high recall for the positive class (is_dead = 1), to minimize false negatives and avoid missing high-risk patients.
 
 ---
 
